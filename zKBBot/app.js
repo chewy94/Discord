@@ -20,7 +20,7 @@ function blah(message) {
 				});
 
 				if (test.package.killmail.victim.character) {
-					if (test.package.killmail.victim.corporation === 'ArcJet Heavy Industries') {
+					if (test.package.killmail.victim.corporation.name === 'ArcJet Heavy Industries') {
 						console.log('Victim was an ArcJet member');
 						wasVictim = true;
 					}
