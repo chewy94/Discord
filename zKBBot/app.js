@@ -10,13 +10,9 @@ function blah(message) {
 			test = JSON.parse(body);
 			var attackerCount = 0;
 			var wasVictim = false;
-			// console.log(test);
-			// console.log('--------------------------------------------------------')
-			// console.log(test.package.killmail.attackers);
 			if (test.package) {
 				test.package.killmail.attackers.forEach(function(element) {
 					if (element.character) {
-						console.log(element.corporation.name);
 						if (element.corporation.name === 'ArcJet Heavy Industries') {
 							console.log('Attacker was an ArcJet member');
 							attackerCount++;
@@ -24,14 +20,15 @@ function blah(message) {
 					}
 				});
 
+				console.log(test.package.killmail.victim)
 				if (test.package.killmail.victim.character) {
-					if (test.package.killmail.victim.corporation === 'ArcJet Heavy Industries') {
+					if (test.package.killmail.victim.corporation.name === 'ArcJet Heavy Industries') {
 						console.log('Victim was an ArcJet member');
 						wasVictim = true;
 					}
 				}
 			}
-			console.log('Attackers that were ArcJet: ' + attackerCount);
+			// console.log('Attackers that were ArcJet: ' + attackerCount);
 			if (attackerCount > 0 || wasVictim) {
 				const killUrl = 'https://zkillboard.com/kill/' + test.package.killID;
 				message.channel.send(killUrl);
