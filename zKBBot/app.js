@@ -19,6 +19,7 @@ function blah(message) {
 					}
 				});
 
+				console.log(test.package.killmail.victim)
 				if (test.package.killmail.victim.character) {
 					if (test.package.killmail.victim.corporation.name === 'ArcJet Heavy Industries') {
 						console.log('Victim was an ArcJet member');
@@ -26,7 +27,7 @@ function blah(message) {
 					}
 				}
 			}
-			console.log('Attackers that were ArcJet: ' + attackerCount);
+			// console.log('Attackers that were ArcJet: ' + attackerCount);
 			if (attackerCount > 0 || wasVictim) {
 				const killUrl = 'https://zkillboard.com/kill/' + test.package.killID;
 				message.channel.send(killUrl);
