@@ -14,10 +14,12 @@ jobs:
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/mongo:3.4.4
 
-    working_directory: ~/zKBBot
+    working_directory: ~/repo
 
     steps:
       - checkout
+      
+      -run: ls ~/repo
 
       # Download and cache dependencies
       - restore_cache:
@@ -26,7 +28,7 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: yarn install
+      - run: npm install
 
       - save_cache:
           paths:
