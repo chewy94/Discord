@@ -22,13 +22,13 @@ function blah(message) {
 				// console.log(test.package.killmail.victim)
 				if (test.package.killmail.victim.character) {
 					if (test.package.killmail.victim.corporation.name === 'Pandemic Horde Inc.') {
-						console.log('Victim was an Pandemic member');
+						console.log('Victim was an Pandemic member' + '\tTime: ' + test.package.killmail.killTime);
 						wasVictim = true;
 					}
 				}
 			}
-			// console.log('Attackers that were ArcJet: ' + attackerCount);
 			if (attackerCount > 0 || wasVictim) {
+				console.log('Attackers that were Pandemic members: ' + attackerCount + '\tTime: ' + test.package.killmail.killTime);
 				const killUrl = 'https://zkillboard.com/kill/' + test.package.killID + '\n' + test.package.killmail.killTime;
 				message.channel.send(killUrl);
 			}
