@@ -7,8 +7,11 @@ var zInterval = '';
 
 function blah(corpName, message) {
 	request.get('https://redisq.zkillboard.com/listen.php', (error, response, body) => {
+		if (error) {
+			console.warn(error);
+		}
 		var test;
-		if (body) {
+		if (body && body.charAt(0) != '<') {
 			test = JSON.parse(body);
 			var attackerCount = 0;
 			var wasVictim = false;
