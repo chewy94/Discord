@@ -27,13 +27,18 @@ function blah(corpName, message) {
 				// console.log(test.package.killmail.victim)
 				if (test.package.killmail.victim.character) {
 					if (test.package.killmail.victim.corporation.name === corpName) {
-						console.log('Victim was a(n) ' + corpName + ' member' + '\t\tTime: ' + test.package.killmail.killTime);
+						// console.log('Victim was a(n) ' + corpName + ' member' + '\t\tTime: ' + test.package.killmail.killTime);
 						wasVictim = true;
 					}
 				}
 			}
 			if (attackerCount > 0 || wasVictim) {
-				console.log('Attackers that were ' + corpName + ' members: ' + attackerCount + '\tTime: ' + test.package.killmail.killTime);
+				if (attackerCount > 0) {
+					console.log('Attackers that were ' + corpName + ': ' + attackerCount + '\tTime: ' + test.package.killmail.killTime);
+				} else {
+					console.log(corpName + ' was a victim!' + '\tTime: ' + test.package.killmail.killTime);
+				}
+				
 				const killUrl = 'https://zkillboard.com/kill/' + test.package.killID + '\n' + test.package.killmail.killTime;
 				message.channel.send(killUrl);
 			}
@@ -66,4 +71,4 @@ client.on('message', (message) => {
 	}
 });
 
-client.login(settings.token);
+client.login(settings.testToken);
