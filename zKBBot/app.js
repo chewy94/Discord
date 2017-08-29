@@ -141,10 +141,12 @@ client.on('message', (message) => {
 				let corpName = message.content.split(' ').slice(2).join(' ');
 				message.channel.send('We are fetching killmails for: ' + corpName);
 				zInterval = setInterval(zKillCorp, 500, corpName, message);
-			} else {
+			} else if (message.content.includes('-alliance')) {
 				let allianceName = message.content.split(' ').slice(2).join(' ');
 				message.channel.send('We are fetching killmails for: ' + allianceName);
 				zInterval = setInterval(zKillAlliance, 500, allianceName, message);
+			} else {
+				message.channel.send('I do not recognize that command. Please enter "!help" to see what commands I have available');
 			}
 		} else if (message.content.includes('!help')) {
 			message.channel.send('Commands:\n\t!kills:\n\t\tDescription:\n\t\t\tPosts kills from zKillboard in real time\n\t\tOptions:\n\t\t\t-char\n\t\t\t-corp\n\t\t\t-alliance\n\t\tExample:\n\t\t\t"!kills -corp Celestial Horizon Corp"')
@@ -156,8 +158,6 @@ client.on('message', (message) => {
 			} else {
 				message.channel.send('I am not currently pulling from zKillboard\nPlease type "!help" for more options');
 			}
-		} else {
-			message.channel.send('I do not recognize that command. Please enter "!help" to see what commands I have available');
 		}
 	}
 });
