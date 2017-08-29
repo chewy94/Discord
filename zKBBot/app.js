@@ -48,17 +48,27 @@ function blah(corpName, message) {
 
 client.on('ready', () => {
 	console.log('CLIENT IS ONLINE');
-	client.channels.first().send('I am the killmail bot! To get me started please enter: "!kills [corp name]"\nExample: "!kills Celestial Horizon Corp"');
+	client.channels.first().send('I am the killmail bot! To get me started please enter: "!kills character | corporation | alliance"\nExample: "!kills Celestial Horizon Corp"');
 });
 
 client.on('message', (message) => {
 	if (!message.author.bot) {
 		if (message.content.includes('!kills')) {
-			let corpName = message.content.split(' ').slice(1).join(' ');
-			message.channel.send('We are fetching killmails for: ' + corpName);
-			zInterval = setInterval(blah, 500, corpName, message);
+			if (message.content.includes('-char')) {
+				let charName = message.content.split(' ').slice(2).join(' ');
+				message.channel.send('We are fetching killmails for: ' + charName);
+				zInterval = setInterval(blah, 500, charName, message);
+			} else if (message.content.includes('-corp')) {
+				let corpName = message.content.split(' ').slice(2).join(' ');
+				message.channel.send('We are fetching killmails for: ' + corpName);
+				zInterval = setInterval(blah, 500, corpName, message);
+			} else {
+				let aliianceName = message.content.split(' ').slice(2).join(' ');
+				message.channel.send('We are fetching killmails for: ' + allianceName);
+				zInterval = setInterval(blah, 500, allianceName, message);
+			}
 		} else if (message.content.includes('!help')) {
-			message.channel.send('Commands:\n\t!kills [corp name]\n\tDescription:\n\t\tPosts kills from zKillboard in real time\n\tExample:\n\t\t"!kills Celestial Horizon Corp"')
+			message.channel.send('Commands:\n\t!kills:\n\t\tDescription:\n\t\t\tPosts kills from zKillboard in real time\n\t\tOptions:\n\t\t\t-char\n\t\t\t-corp\n\t\t\t-alliance\n\t\tExample:\n\t\t\t"!kills -corp Celestial Horizon Corp"')
 		} else if (message.content.includes('!stop') || message.content.includes('!quit')) {
 			if (zInterval !== '') {
 				clearInterval(zInterval);
